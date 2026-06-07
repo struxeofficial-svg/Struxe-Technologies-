@@ -583,9 +583,6 @@ h3 {
 }
 
 .contact {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1fr);
-  gap: 42px;
   margin-top: 96px;
   margin-bottom: 48px;
   padding: 38px;
@@ -604,54 +601,6 @@ h3 {
 
 .contact-details span {
   color: var(--muted);
-}
-
-.contact-form {
-  display: grid;
-  gap: 16px;
-}
-
-.contact-form label {
-  display: grid;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.contact-form input,
-.contact-form textarea,
-.contact-form select {
-  width: 100%;
-  color: var(--text);
-  background: rgba(5, 5, 5, 0.68);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  outline: none;
-}
-
-.contact-form input,
-.contact-form select {
-  min-height: 48px;
-  padding: 0 14px;
-}
-
-.contact-form textarea {
-  resize: vertical;
-  padding: 14px;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus,
-.contact-form select:focus {
-  border-color: rgba(255, 210, 30, 0.78);
-  box-shadow: 0 0 0 4px rgba(255, 210, 30, 0.13);
-}
-
-.form-note {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.9rem;
 }
 
 .site-footer {
