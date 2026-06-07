@@ -463,6 +463,10 @@ h3 {
   background: linear-gradient(145deg, rgba(255, 210, 30, 0.16), rgba(255, 255, 255, 0.055));
 }
 
+.service-card p + p {
+  margin-top: 14px;
+}
+
 .process {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1fr);
