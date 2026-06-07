@@ -431,6 +431,11 @@ h3 {
   transform: translateY(-50%);
 }
 
+.about-list + p {
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.7fr);
