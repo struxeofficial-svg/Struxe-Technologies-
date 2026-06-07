@@ -559,6 +559,12 @@ h3 {
 }
 
 .stats span {
+  display: block;
+  color: var(--muted);
+}
+
+.stats p {
+  margin: 12px 0 0;
   color: var(--muted);
 }
 
