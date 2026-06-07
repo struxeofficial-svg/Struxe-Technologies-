@@ -113,7 +113,8 @@ select {
 }
 
 .site-nav a:hover,
-.site-nav a:focus-visible {
+.site-nav a:focus-visible,
+.site-nav a[aria-current="page"] {
   color: var(--text);
   background: rgba(255, 255, 255, 0.08);
   outline: none;
@@ -603,6 +604,86 @@ h3 {
   color: var(--muted);
 }
 
+.page-hero {
+  padding: 98px 0 54px;
+}
+
+.page-hero h1 {
+  max-width: 960px;
+}
+
+.page-hero p:not(.eyebrow) {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.12rem;
+}
+
+.careers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding-bottom: 36px;
+}
+
+.career-card,
+.careers-callout,
+.value-card {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.career-card {
+  min-height: 285px;
+  padding: 28px;
+}
+
+.career-card:nth-child(2) {
+  background: linear-gradient(145deg, rgba(255, 210, 30, 0.16), rgba(255, 255, 255, 0.055));
+}
+
+.career-card h2 {
+  margin-bottom: 12px;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+}
+
+.career-card p,
+.careers-callout p,
+.value-card span {
+  color: var(--muted);
+}
+
+.careers-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(320px, 1fr);
+  gap: 28px;
+  align-items: end;
+  padding: 34px;
+}
+
+.careers-callout p {
+  margin-bottom: 0;
+  font-size: 1.07rem;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding: 36px 0 72px;
+}
+
+.value-card {
+  display: grid;
+  gap: 10px;
+  padding: 24px;
+}
+
+.value-card strong {
+  color: var(--brand);
+  font-size: 1.1rem;
+}
+
 .site-footer {
   display: flex;
   flex-wrap: wrap;
@@ -662,6 +743,7 @@ h3 {
   .split,
   .process,
   .results,
+  .careers-callout,
   .contact {
     grid-template-columns: 1fr;
   }
@@ -672,6 +754,11 @@ h3 {
   }
 
   .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .careers-grid,
+  .values {
     grid-template-columns: 1fr;
   }
 }
@@ -693,9 +780,14 @@ h3 {
   }
 
   .process,
+  .careers-callout,
   .contact,
   .testimonial {
     padding: 26px;
+  }
+
+  .page-hero {
+    padding-top: 72px;
   }
 
   .split {
