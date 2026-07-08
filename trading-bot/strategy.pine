@@ -1,4 +1,4 @@
-//@version=5
+//@version=6
 strategy(
      "Pullback + Candle Bot",
      overlay=true,
@@ -29,10 +29,10 @@ nearEma    = math.abs(close - ema20) / close < 0.005
 pullback   = uptrend and retracePct >= minRetrace and retracePct <= maxRetrace and nearEma
 
 // --- Candle patterns ---
-body      = math.abs(close - open)
-lowerWick = math.min(open, close) - low
-upperWick = high - math.max(open, close)
-hammer    = lowerWick >= 2 * body and upperWick <= body * 0.5 and close > open
+body       = math.abs(close - open)
+lowerWick  = math.min(open, close) - low
+upperWick  = high - math.max(open, close)
+hammer     = lowerWick >= 2 * body and upperWick <= body * 0.5 and close > open
 bullEngulf = close > open and close[1] < open[1] and close > open[1] and open < close[1]
 
 // --- Confidence score ---
