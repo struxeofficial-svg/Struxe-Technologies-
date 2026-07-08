@@ -36,6 +36,8 @@ longLimit = close + atr * tpAtrMult
 
 if buySignal
     strategy.entry("Long", strategy.long)
+
+if buySignal
     strategy.exit("TP/SL", from_entry="Long", stop=longStop, limit=longLimit)
 
 if sellSignal
