@@ -1,0 +1,6 @@
+ccxt>=4.4.0
+pandas>=2.2.0
+numpy>=1.26.0
+pyyaml>=6.0.1
+python-dotenv>=1.0.0
+ta>=0.11.0
