@@ -1,0 +1,59 @@
+//@version=5
+strategy(
+     "Pullback + Candle Bot",
+     overlay=true,
+     default_qty_type=strategy.percent_of_equity,
+     default_qty_value=1,
+     pyramiding=0)
+
+// --- Settings ---
+emaLen     = input.int(20, "EMA Period", minval=1)
+minRetrace = input.float(23.6, "Min Retrace %", minval=0)
+maxRetrace = input.float(61.8, "Max Retrace %", minval=0)
+minConf    = input.float(65, "Min Confidence", minval=0, maxval=100)
+slAtrMult  = input.float(1.5, "SL ATR Mult", minval=0.1)
+tpAtrMult  = input.float(3.0, "TP ATR Mult", minval=0.1)
+atrLen     = input.int(14, "ATR Period", minval=1)
+
+// --- Indicators ---
+ema20     = ta.ema(close, emaLen)
+atr       = ta.atr(atrLen)
+swingHigh = ta.highest(high, 20)
+swingLow  = ta.lowest(low, 20)
+impulse   = swingHigh - swingLow
+
+// --- Pullback (EMA uptrend) ---
+uptrend    = ema20 > ema20[5] and close > ema20[10]
+retracePct = impulse > 0 ? (swingHigh - close) / impulse * 100 : 0.0
+nearEma    = math.abs(close - ema20) / close < 0.005
+pullback   = uptrend and retracePct >= minRetrace and retracePct <= maxRetrace and nearEma
+
+// --- Candle patterns ---
+body      = math.abs(close - open)
+lowerWick = math.min(open, close) - low
+upperWick = high - math.max(open, close)
+hammer    = lowerWick >= 2 * body and upperWick <= body * 0.5 and close > open
+bullEngulf = close > open and close[1] < open[1] and close > open[1] and open < close[1]
+
+// --- Confidence score ---
+score = (pullback ? 30.0 : 0.0) + (hammer ? 25.0 : 0.0) + (bullEngulf ? 25.0 : 0.0) + (uptrend ? 15.0 : 0.0)
+
+buySignal  = score >= minConf and strategy.position_size == 0
+sellSignal = strategy.position_size > 0 and close < ema20 and close < close[1]
+
+// --- TP / SL prices ---
+longStop  = close - atr * slAtrMult
+longLimit = close + atr * tpAtrMult
+
+// --- Entries / exits ---
+if buySignal
+    strategy.entry("Long", strategy.long)
+    strategy.exit("TP/SL", from_entry="Long", stop=longStop, limit=longLimit)
+
+if sellSignal
+    strategy.close("Long")
+
+// --- Visuals (must stay at top level, not inside if blocks) ---
+plot(ema20, "EMA 20", color=color.orange)
+plotshape(buySignal, title="Buy", style=shape.triangleup, location=location.belowbar, color=color.green, size=size.small)
+bgcolor(pullback ? color.new(color.blue, 90) : na)
