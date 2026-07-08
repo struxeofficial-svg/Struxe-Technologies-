@@ -1,0 +1,48 @@
+mode: paper  # paper | live
+
+exchange:
+  name: binance
+  sandbox: true
+
+symbols:
+  - BTC/USDT
+  - ETH/USDT
+
+timeframes:
+  trend: 1h
+  setup: 15m
+  entry: 5m
+
+strategy:
+  min_confidence: 65
+  patterns:
+    - hammer
+    - bullish_engulfing
+    - bearish_engulfing
+    - morning_star
+    - evening_star
+    - shooting_star
+    - doji
+  pullback:
+    type: ema
+    ema_period: 20
+    max_retrace_pct: 61.8
+    min_retrace_pct: 23.6
+
+risk:
+  risk_per_trade_pct: 1.0
+  max_open_positions: 3
+  max_daily_loss_pct: 3.0
+  account_balance: 10000.0
+
+tp_sl:
+  method: atr
+  sl_atr_mult: 1.5
+  tp_atr_mult: 3.0
+  use_trailing_sl: false
+  trail_atr_mult: 1.0
+  atr_period: 14
+
+bot:
+  poll_interval_seconds: 30
+  candle_limit: 200
